@@ -8,7 +8,9 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -18,7 +20,10 @@ import (
 )
 
 func main() {
-	region := "us-east-2"
+	region, err := getRegion()
+	if err != nil {
+		log.Fatalf("Failed to parse region:\n%v", err.Error())
+	}
 
 	scanner := bufio.NewScanner(os.Stdin)
 	if !scanner.Scan() {
@@ -26,7 +31,7 @@ func main() {
 	}
 
 	text := secrets{}
-	err := json.Unmarshal(scanner.Bytes(), &text)
+	err = json.Unmarshal(scanner.Bytes(), &text)
 	if err != nil {
 		log.Println("failed to unmasharl the object")
 	}
@@ -41,6 +46,28 @@ func main() {
 
 	jsonString, _ := json.Marshal(data)
 	fmt.Println(string(jsonString))
+}
+
+func getRegion() (string, error) {
+	resp, err := http.Get("http://169.254.169.254/latest/dynamic/instance-identity/document/")
+	if err != nil {
+		return "", err
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	ec2matadata := metadata{}
+	err = json.Unmarshal(body, &ec2matadata)
+	if err != nil {
+		return "", err
+	}
+	fmt.Println(ec2matadata.Region)
+	return ec2matadata.Region, nil
 }
 
 func getSecret(secretName, region string, ch chan output) {
@@ -109,9 +136,15 @@ func getSecret(secretName, region string, ch chan output) {
 	// Decrypts secret using the associated KMS CMK.
 	// Depending on whether the secret is a string or binary, one of these fields will be populated.
 	var secretString, decodedBinarySecret string
+	var ddSecretValue ddSecret
 	if result.SecretString != nil {
 		secretString = *result.SecretString
-		ch <- output{secretString, ""}
+		_ = json.Unmarshal([]byte(secretString), &ddSecretValue)
+		if ddSecretValue.DDSecret == "" {
+			ch <- output{"", "could not fetch the secret"}
+		} else {
+			ch <- output{ddSecretValue.DDSecret, ""}
+		}
 		return
 	} else {
 		decodedBinarySecretBytes := make([]byte, base64.StdEncoding.DecodedLen(len(result.SecretBinary)))
@@ -138,4 +171,12 @@ type secrets struct {
 type output struct {
 	Value string `json:"value"`
 	Err   string `json:"error"`
+}
+
+type ddSecret struct {
+	DDSecret string `json:"dd-secret"`
+}
+
+type metadata struct {
+	Region string `json:"region"`
 }
