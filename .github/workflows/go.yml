@@ -1,4 +1,4 @@
-name: linux
+name: linux-datadog-aws-secrets-manager
 
 on:
   pull_request:
@@ -23,7 +23,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v2
         with:
           distribution: goreleaser
-          version: datadog-aws-secrets-manager
+          version: latest
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GO_SECRETS_TOKEN }}
