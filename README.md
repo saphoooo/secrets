@@ -12,7 +12,7 @@ Go Secret Manager is a tool that allows you to use encrypted secrets in Datadog 
 
 EC2 instances targeted to use this feature first need a role to be able to read from the Secrets Manager. Let’s start with a simple role:
 
-![fig1](https://a.cl.ly/RBuEKxqj)
+![fig1](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/RBuEKxqj/c52fce5b-7bc1-4348-a7ff-51de0f370eff.jpg?source=viewer&v=560a4445f0b616c3f7b0657901795e77)
 
 And its associated policy:
 
@@ -31,7 +31,7 @@ And its associated policy:
 
 You need to associate this role to the EC2 instance:
 
-![fig2](https://a.cl.ly/E0uK21rd)
+![fig2](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/E0uK21rd/7be2f461-babc-4c10-a2cb-92a38e88e5cc.jpg?source=viewer&v=094cc30340b204b313cc64247e85e892)
 
 ### Setup
 
@@ -48,25 +48,25 @@ sudo chown dd-agent <path_to_exectuable>
 
 Go to AWS Secrets Manager and store a new secret:
 
-![fig3](https://a.cl.ly/jkuEgbq7)
+![fig3](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/jkuEgbq7/f3b49093-23f2-4e83-b82a-20e4bcff0d1b.jpg?source=viewer&v=2d412bdf7dc5b481ff949a2f867f87b2)
 
 Choose key/value pair:
 
-![fig4](https://a.cl.ly/z8u1AeqO)
+![fig4](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/z8u1AeqO/6a2fac1a-bc5a-40b1-b808-6cfac23bbc73.jpg?source=viewer&v=6b57af7c6c23cde31e3227ecdf05bb1b)
 
 The key MUST be **dd-secret** in order to let the tool retrieve it. Enter the secret value and go to the next step.
 
-![fig5](https://a.cl.ly/YEuPGndB)
+![fig5](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/YEuPGndB/cf57e9f5-2b3c-4687-8f35-4f62eb795dc8.jpg?source=viewer&v=3618f7f9a8ab6361693d84e889549d3a)
 
 Give a name to your secret and an optional description, then go to the next step.
 
-![fig6](https://a.cl.ly/YEuPGndB)
+![fig6](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/YEuPGndB/cf57e9f5-2b3c-4687-8f35-4f62eb795dc8.jpg?source=viewer&v=3618f7f9a8ab6361693d84e889549d3a)
 
 Just click on next.
 
 There is nothing to do for the step 4, just click **store** to store your new secret:
 
-![fig7](https://a.cl.ly/GGu4PGkv)
+![fig7](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/wbu8ZEmK/f5c7344f-e42c-4920-a978-e06142066e1c.jpg?source=viewer&v=8010345be61a6ae4d5e3ee77107606fb)
 
 ## Try it out!
 
@@ -74,11 +74,11 @@ There is nothing to do for the step 4, just click **store** to store your new se
 
 Verify your setup:
 
-![fig8](https://a.cl.ly/P8u80AKA)
+![fig8](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/P8u80AKA/732e6855-d95d-4acc-8ed4-4c53a88194a4.jpg?source=viewer&v=55978c888224a292093a43f29c01bfde)
 
 Try to use it manually:
 
-![fig9](https://a.cl.ly/yAu0X5NR)
+![fig9](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/yAu0X5NR/7e7ad576-cf16-4e02-b3e3-39f728b064ab.jpg?source=viewer&v=44f2c711b96a0adef450e2594317c0e0)
 
 ```bash
 sudo su dd-agent -s /bin/bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"my-secret-env\"]}'|/usr/local/bin/datadog-secrets-aws"
@@ -116,7 +116,7 @@ sudo systemctl restart datadog-agent
 
 Check agent status:
 
-![fig10](https://a.cl.ly/RBuE65EO)
+![fig10](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/RBuE65EO/32021b6f-841c-437a-a160-f056ea038f05.jpg?source=viewer&v=32949cd192058303bcac23e9a42cbb2b)
 
 ### On Windows
 
@@ -147,11 +147,11 @@ Before restarting the agent, check that you’ve set the correct permissions on 
 
 Disable the inheritance and add SYSTEM and Administrator in Read and Execute:
 
-![fig11](https://a.cl.ly/P8u8vZ2m)
+![fig11](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/P8u8vZ2m/03b9db83-682c-45ce-b9f0-110cc46f16f2.jpg?source=viewer&v=6fe116bd3b30552d8f3a8db356c1a128)
 
 Restart the agent:
 
-![fig12](https://a.cl.ly/E0uKWGOj)
+![fig12](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/E0uKWGOj/772ef5d2-cbe6-4da6-817f-355c0303dad8.jpg?source=viewer&v=6e73b4412afd2359baa3e1d90669e186)
 
 ### Troubleshooting
 
