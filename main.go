@@ -1,5 +1,4 @@
-// https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html?icmpid=docs_asm_console
-// https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html
+// https://docs.datadoghq.com/agent/guide/secrets-management/?tab=linux
 
 package main
 
