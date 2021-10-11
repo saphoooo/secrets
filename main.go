@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
@@ -49,7 +50,11 @@ func main() {
 }
 
 func getRegion() (string, error) {
-	resp, err := http.Get("http://169.254.169.254/latest/dynamic/instance-identity/document/")
+	client := http.Client{
+		Timeout: 2 * time.Second,
+	}
+
+	resp, err := client.Get("http://169.254.169.254/latest/dynamic/instance-identity/document/")
 	if err != nil {
 		return "", err
 	}
