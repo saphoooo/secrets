@@ -14,6 +14,10 @@ EC2 instances targeted to use this feature first need a role to be able to read 
 
 ![fig1](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/RBuEKxqj/c52fce5b-7bc1-4348-a7ff-51de0f370eff.jpg?source=viewer&v=560a4445f0b616c3f7b0657901795e77)
 
+<img src="https://a.cl.ly/RBuEKxqj"
+     alt="test"
+     style="float: left; margin-right: 10px;" />
+
 And its associated policy:
 
 ```json
