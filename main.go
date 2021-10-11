@@ -71,7 +71,6 @@ func getRegion() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	fmt.Println(ec2matadata.Region)
 	return ec2matadata.Region, nil
 }
 
