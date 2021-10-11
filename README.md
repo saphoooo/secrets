@@ -177,7 +177,7 @@ to execute secretBackendCommand
 'C:\Program Files\Datadog\Datadog Agent\bin\datadog-secrets-aws.exe'
 ```
 
-And you have to figure out which user is S-1-5-21-1163014751-2161214003-1688321825-500, run the following command and then update your permissions accordingly:
+And you have to figure out which user is `S-1-5-21-1163014751-2161214003-1688321825-500`, run the following command and then update your permissions accordingly:
 
 ```
 wmic useraccount get name,sid
